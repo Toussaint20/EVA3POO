@@ -10,7 +10,7 @@ class Encomienda():
     
     #método para entregar datos a la BD
     def returnArray(self): 
-        return [self.id,self.destinatario,self.direccion]
+        return [self.id,self.destinatario,self.direccion,self.c_origen,self.c_destino,self.peso]
 
 class Courier():
     
@@ -21,7 +21,7 @@ class Courier():
     def listarEncomiendas(self):
         print("\nEncomiendas: \n")
         for enc in self.encomiendas:
-            datos = "ID {0}. Destinatario: {1}, Direccion {2}"
+            datos = "ID {0}, Destinatario: {1}, Direccion {2}, C_origen {3}, C_destino {4}, Peso {5}"
             print(datos.format(enc.id, enc.destinatario, enc.direccion))
         print(" ")
     
@@ -46,7 +46,7 @@ class Courier():
             print(datos.format(enc.id, enc.destinatario, enc.direccion))
         print(" ")
 
-    #métodos que modifican la Agenda
+    #métodos que modifican el Courier
 
     def addEncomienda(self,encomienda):
         self.encomiendas.append(encomienda)
@@ -69,6 +69,17 @@ class Courier():
         c_origen = input("Ingrese ciudad de origen de envío:")
         c_destino = input("Ingrese ciudad de destino de envío:")
         peso = input("Ingrese peso de envío:")
+        NumeroCorrecto = False
+        while(not NumeroCorrecto):
+            peso = input("Ingrese Número Telefónico: ")
+            if peso.isnumeric():
+                if (int(peso) > 0 and len(peso)<10):
+                    NumeroCorrecto = True
+                    peso = int(peso)
+                else:
+                    print("El número debe ser mayor a 0 y de 9 dígitos máximo.")
+            else:
+                print("Número incorrecto: Debe ser un número Únicamente.")
         encomienda = Encomienda(id,destinatario, direccion, c_origen, c_destino, peso)
         return encomienda
 
@@ -79,7 +90,7 @@ class Courier():
         for enc in self.encomiendas:
             if enc.id > id:
                 id = enc.id
-        encomienda=Agenda.pedirDatosRegistro(id+1) #esto asegura que el id es mayor al último registrado
+        encomienda=Courier.pedirDatosRegistro(id+1) #esto asegura que el id es mayor al último registrado
         self.addEncomienda(encomienda) #agrega al contacto a la lista en el obj
         return encomienda
 
@@ -102,7 +113,7 @@ class Courier():
 
         if existeId > -1:
             print("ingrese datos a modificar")
-            encomienda=Agenda.pedirDatosRegistro(idEditar)
+            encomienda=Courier.pedirDatosRegistro(idEditar)
             self.encomiendas[existeId]=encomienda #modifica el contacto en el objeto
         else:
             encomienda = None
