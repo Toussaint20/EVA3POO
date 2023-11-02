@@ -84,10 +84,7 @@ def ejecutarOpcion(opcion):
             #actualizarcourier()
             if len(courier.encomiendas) > 0:
                 courier.listarEncomienda()
-            and if encomienda:
-                    dao.listarEncomienda(encomienda.returnArray())
-            else:
-                print("No se encontraron Encomiendas...")
+            
         except:
             print("Ocurrió un error...")
     else:
