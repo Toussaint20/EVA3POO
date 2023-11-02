@@ -3,7 +3,6 @@ from mysql.connector import Error
 
 #Data Access Object
 class DAO():
-
     def __init__(self):
         try:
             self.conexion = mysql.connector.connect(
@@ -11,10 +10,11 @@ class DAO():
                 port=3306,
                 user='root',
                 password='',
-                db='agenda'
+                db='courier'
             )
         except Error as ex:
             print("Error al intentar la conexión: {0}".format(ex))
+            
 
     def listarEncomiendas(self):
         if self.conexion.is_connected():
@@ -30,8 +30,8 @@ class DAO():
         if self.conexion.is_connected():
             try:
                 cursor = self.conexion.cursor()
-                sql = "INSERT INTO Registro (Id, Destinatario, Direccion) VALUES ('{0}', '{1}', '{2}')"
-                cursor.execute(sql.format(encomienda[0], encomienda[1], encomienda[2]))
+                sql = "INSERT INTO Registro (Id, Destinatario, Direccion, C_origen, C_destino, Peso) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')"
+                cursor.execute(sql.format(encomienda[0], encomienda[1], encomienda[2], encomienda[3], encomienda[4], encomienda[5]))
                 self.conexion.commit()
                 print("¡Encomienda registrada!\n")
             except Error as ex:
