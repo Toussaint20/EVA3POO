@@ -83,12 +83,12 @@ class DAO():
                 print("Error al intentar la conexión: {0}".format(ex))
                 self.conexion.rollback()
 
-    def Login(self, usuario, password):
+    def Login(self, usuario):
             if self.conexion.is_connected():
                 try:
                     cursor = self.conexion.cursor()
-                    sql = "SELECT usuario FROM usuarios WHERE usuario= %s AND password = %s"
-                    cursor.execute(sql, (usuario, password))
+                    user = (usuario,)
+                    cursor.execute("SELECT * FROM usuarios WHERE usuario = %s",(user))
                     resultados = cursor.fetchall()
                     return resultados
                 except Error as ex:

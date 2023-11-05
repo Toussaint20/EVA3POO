@@ -2,6 +2,7 @@ from BD.conn import DAO
 #requiere un archivo en carpeta BD con nombre __init__.py 
 #(este archivo indica qué importaría de esta carpeta, si está vacío importa todo)
 from clase import Courier, Encomienda
+import hashlib
 
 def actualizarCourier():
     arrayEncomiendas = dao.listarEncomiendas() #saca los encomiendas de la BD y los deja en un array de tuplas 
@@ -10,18 +11,23 @@ def actualizarCourier():
        courier.addEncomienda(Encomienda(con[0],con[1],con[2],con[3],con[4],con[5]))
 
 def login():
-    continuar = True #continuar = true para que al cerrar sesión vuelva al login
-    while continuar:
+    continuar = False 
+    while not continuar:
         print("=== Inicio de Sesión ===")
         usuario = input("Ingrese su ID de usuario: ")
         password = input("Ingrese su contraseña: ")
-
-        resultados = dao.Login(usuario, password)
+        resultados = dao.Login(usuario)
         if resultados:
-            print("=== ¡Inicio de sesión exitoso! ===")
-            menuPrincipal()  
+            passHash = hashlib.md5(password.encode())
+            passData = (resultados[0])[1]
+            if passHash.hexdigest() == passData:
+                continuar = True
+                print("=== ¡Inicio de sesión exitoso! ===")
+                menuPrincipal()
+            else:
+                print("ID de usuario o contraseña incorrectos. Intente nuevamente.") 
         else:
-            print("ID de usuario o contraseña incorrectos. Intente nuevamente.")  
+            print("ID de usuario o contraseña incorrectos. Intente nuevamente.")
 
 def menuPrincipal():
     continuar = True
@@ -92,7 +98,7 @@ def ejecutarOpcion(opcion):
                 idEliminar = courier.eliminarEncomienda()
                 if not(idEliminar == 0):
                     dao.eliminarEncomiendas(idEliminar)
-                    
+                    actualizarCourier()
                 else:
                     print("Id de encomienda no encontrada...\n")
             else:
@@ -100,19 +106,24 @@ def ejecutarOpcion(opcion):
         except:
             print("Ocurrió un error...")    
     elif opcion == 5:
-         try:
+          try:
             #listar al detalle
             if len(courier.encomiendas) > 0:
                 idDetalle = courier.listarEncomienda()
                 if not(idDetalle == 0):
-                    detalle = dao.listarEncomienda(idDetalle)   
-                    print(detalle) 
+                    arrayDetalle = dao.listarEncomienda(idDetalle)
+                    courier.encomiendas = []
+                    for con in arrayDetalle:
+                        courier.addEncomienda(Encomienda(con[0],con[1],con[2],con[3],con[4],con[5]))
+                        courier.listarEncDetalle()
+                        actualizarCourier()
+
                 else:
                     print("Id de encomienda no encontrada...\n")
             else:
                 print("No se encontraron encomiendas...")
-         except:
-             print("Ocurrió un error...")    
+          except:
+              print("Ocurrió un error...")    
         
     
 

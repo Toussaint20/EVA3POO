@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-11-2023 a las 02:43:24
+-- Tiempo de generación: 05-11-2023 a las 19:14:10
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `registro` (
   `C_destino` varchar(64) NOT NULL,
   `Peso` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `registro`
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `registro` (
 
 INSERT INTO `registro` (`Id`, `Destinatario`, `Direccion`, `C_origen`, `C_destino`, `Peso`) VALUES
 (1, 'Tomas Cid', 'Blanco Encalada 210', 'Tokyo', 'Gorbea', 45),
-(2, 'John Cena', 'Pablo Neruda 331', 'Santiago', 'Rancagua', 200),
+(2, 'John Cena', 'Pluton 654', 'Santiago', 'Rancagua', 200),
 (3, 'Tokoyami Towa', 'Hololive Corp 241', 'Gorbea', 'Tokyo', 45),
 (4, 'Elton Jon', 'Los Poetas 345', 'Valdivia', 'Puerto Montt', 32),
 (5, 'Keanu Reeves', 'Pasaje Vega 02147', 'Santiago', 'Temuco', 15);
@@ -58,7 +58,7 @@ INSERT INTO `registro` (`Id`, `Destinatario`, `Direccion`, `C_origen`, `C_destin
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `usuario` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -67,11 +67,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`usuario`, `password`) VALUES
-('Admin', 'SoyAdmin123'),
-('KurtCobain', 'Nevermind'),
-('SONIC', 'SONICADVENTURE2'),
-('TheSilent', 'BladeDanceIsOP'),
-('TMT26', 'Kenzoku4life');
+('Admin', '202cb962ac59075b964b07152d234b70'),
+('KurtCobain', '17f956b3682068879cc1aec7576f0874'),
+('SONIC', 'c492e2055c443b958f77121954274958'),
+('TheSilent', '3395f8341de86d74eec6921562f49ca5'),
+('TMT26', 'ac9d7246c37cd747bfc16faf27009255');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

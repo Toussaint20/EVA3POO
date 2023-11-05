@@ -51,12 +51,19 @@ class Courier():
                 else:
                     print("El Id debe ser mayor a 0.")
             else:
-                print("debe ingresar un número.")
-
+                print("Debe ingresar un número.")
+    
         existeId=self.idExiste(idDetalle)        
         if existeId == -1:
             idDetalle = 0        
         return idDetalle
+    
+    def listarEncDetalle(self):
+        print("\nEncomiendas: \n")
+        for con in self.encomiendas:
+            datos = "ID: {0}, Destinatario: {1}, Direccion: {2}, Ciudad de origen: {3}, Ciudad de destino: {4}, Peso: {5}kg"
+            print(datos.format(con.id, con.destinatario, con.direccion, con.c_origen, con.c_destino, con.peso))
+        print(" ")
         
 
     #métodos que modifican el Courier
@@ -82,7 +89,6 @@ class Courier():
         destinoCorrecto = False
         while(not destinatarioCorrecto):
             destinatario = input("Ingrese nombre de destinatario: ")
-            print(destinatario)
             if destinatario !="":
                 destinatarioCorrecto = True
                 destinatario = str(destinatario)
@@ -198,9 +204,3 @@ class Courier():
 
         return idEliminar
     
-    def listarData(self):
-        print("\nEncomiendas: \n")
-        # for con in self.encomiendas:
-        datos = "ID: {0}, Destinatario: {1}, Direccion: {2}, Destinatario: {3}, Destinatario: {4}, Peso: {5} kg"
-            # print(datos.format(con.id, con.destinatario, con.direccion, con.c_origen, con.c_destino, con.peso))
-        print(datos.format(self.id, self.destinatario, self.direccion, self.c_origen, self.c_destino, self.peso))
