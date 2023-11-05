@@ -17,8 +17,8 @@ def login():
         password = input("Ingrese su contraseña: ")
 
         resultados = dao.Login(usuario, password)
-        print(resultados)
         if resultados:
+            print("=== Inicio de sesión exitoso! ===")
             menuPrincipal()  
         else:
             print("ID de usuario o contraseña incorrectos. Intente nuevamente.")  
