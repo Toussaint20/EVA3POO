@@ -1,5 +1,6 @@
 import hashlib
 
+db_contraseña = "a81470672922255ae45b6cbcec2dfff7"
 contraseña = input("¿Cuál es tu contraseña?")
 
 result = hashlib.md5(contraseña.encode())
@@ -13,5 +14,4 @@ else:
    print("Login o Password erroneo")
 
 
-# si lo quieres probar solo hay que sacar el if y el else
-# hay que definir el db_contraseña 
+ 
