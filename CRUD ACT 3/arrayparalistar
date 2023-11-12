@@ -1,0 +1,10 @@
+
+  def returnArrayListarD(self): 
+        return [self.id,self.destinatario,self.direccion]
+
+def listarEncDetalle(self):
+        print("\nEncomiendas: \n")
+        for con in self.encomiendas:
+            datos = "ID: {0}, Destinatario: {1}, Direccion: {2},"
+            print(datos.format(con.id, con.destinatario, con.direccion))
+        print(" ")
