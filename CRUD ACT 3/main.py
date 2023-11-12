@@ -1,14 +1,14 @@
 from BD.conn import DAO 
 #requiere un archivo en carpeta BD con nombre __init__.py 
 #(este archivo indica qué importaría de esta carpeta, si está vacío importa todo)
-from clase import Courier, Encomienda
+from clase import Courier, Encomiendalistar, EncomiendaDetalle
 import hashlib
 
 def actualizarCourier():
     arrayEncomiendas = dao.listarEncomiendas() #saca los encomiendas de la BD y los deja en un array de tuplas 
     courier.encomiendas=[] #vacía la courier
     for con in arrayEncomiendas: #los pone en el objeto courier como objetos encomienda
-       courier.addEncomienda(Encomienda(con[0],con[1],con[2],con[3],con[4],con[5]))
+       courier.addEncomienda(Encomiendalistar(con[0],con[1],con[2]))
 
 def login():
     continuar = False 
@@ -72,7 +72,7 @@ def ejecutarOpcion(opcion):
         #registrar
         encomienda = courier.agregarEncomienda()
         try:
-            dao.registrarEncomiendas(encomienda.returnArray())
+            dao.registrarEncomiendas(encomienda.returnArray1())
             actualizarCourier()
         except:
             print("Ocurrió un error...")
@@ -83,7 +83,7 @@ def ejecutarOpcion(opcion):
                 encomienda = courier.actualizarEncomienda()              
                 
                 if encomienda:
-                    dao.actualizarEncomiendas(encomienda.returnArray())
+                    dao.actualizarEncomiendas(encomienda.returnArray2())
                     actualizarCourier()
                 else:
                     print("Id de encomienda a actualizar no encontrado...\n")
@@ -114,7 +114,7 @@ def ejecutarOpcion(opcion):
                     arrayDetalle = dao.listarEncomienda(idDetalle)
                     courier.encomiendas = []
                     for con in arrayDetalle:
-                        courier.addEncomienda(Encomienda(con[0],con[1],con[2],con[3],con[4],con[5]))
+                        courier.addEncomienda(EncomiendaDetalle(con[0],con[1],con[2],con[3],con[4],con[5]))
                         courier.listarEncDetalle()
                         actualizarCourier()
 

@@ -20,7 +20,7 @@ class DAO():
         if self.conexion.is_connected():
             try:
                 cursor = self.conexion.cursor()
-                cursor.execute("SELECT * FROM Registro ORDER BY Id ASC")
+                cursor.execute("SELECT Id, Destinatario, Direccion FROM Registro ORDER BY Id ASC")
                 resultados = cursor.fetchall()
                 return resultados
             except Error as ex:
@@ -42,7 +42,7 @@ class DAO():
         if self.conexion.is_connected():
             try:
                 cursor = self.conexion.cursor()
-                sql = "UPDATE registro SET Direccion = '{2}' WHERE Id = '{0}'"
+                sql = "UPDATE registro SET Direccion = '{1}' WHERE Id = '{0}'"
                 cursor.execute(sql.format(*encomienda))
                 self.conexion.commit()
                 print("¡Dirección de envío actualizada!\n")
@@ -93,5 +93,3 @@ class DAO():
                     return resultados
                 except Error as ex:
                     print("Error al intentar la conexión: {0}".format(ex))
-
-#print(mysql.connector.Date(1900,3,23)) #usar constructor de fecha para generar una fecha compatible con la BD

@@ -1,4 +1,10 @@
-class Encomienda():
+class Encomiendalistar():
+    def __init__(self,id,destinatario, direccion):
+        self.id = id
+        self.destinatario = destinatario
+        self.direccion = direccion
+        
+class EncomiendaDetalle():
     def __init__(self,id,destinatario, direccion, c_origen, c_destino, peso):
         self.id = id
         self.destinatario = destinatario
@@ -7,10 +13,18 @@ class Encomienda():
         self.c_destino = c_destino
         self.peso = peso
 
-    
     #método para entregar datos a la BD
-    def returnArray(self): 
+    def returnArray1(self): 
         return [self.id,self.destinatario,self.direccion,self.c_origen,self.c_destino,self.peso]
+    
+class EncomiendaAct():
+    def __init__(self,id, direccion):
+        self.id = id        
+        self.direccion = direccion
+
+    #método para entregar datos a la BD
+    def returnArray2(self): 
+        return [self.id,self.direccion]
 
 class Courier():
     
@@ -128,18 +142,14 @@ class Courier():
                     print("El número debe ser mayor a 0 y de 9 dígitos máximo.")
             else:
                 print("Número incorrecto: Debe ser un número Únicamente.")
-        encomienda = Encomienda(id,destinatario, direccion, c_origen, c_destino, peso)
+        encomienda = EncomiendaDetalle(id,destinatario, direccion, c_origen, c_destino, peso)
         return encomienda
     
     @staticmethod
     def pedirDatosActDir(id):
     
-        direccion = input("Ingrese dirección de envío:")
-        destinatario = None
-        c_origen = None
-        c_destino = None
-        peso = None
-        encomienda = Encomienda(id, destinatario, direccion, c_origen, c_destino, peso)
+        direccion = input("Ingrese dirección de envío:")        
+        encomienda = EncomiendaAct(id, direccion)
         return encomienda
 
     #métodos para pedir al usuario los datos para usar el CRUD
