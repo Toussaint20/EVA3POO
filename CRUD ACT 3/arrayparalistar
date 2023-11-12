@@ -3,5 +3,5 @@ def nuevolistarEncomiendas(self):
         print("\nEncomiendas (Nuevo Array): \n")
         for con in self.nuevo_array:
             datos = "Direccion: {0}, Peso: {1}kg, Origen: {2}}"
-            print(datos.format(con.direccion, con.peso, con.c_origen, con.longitud, con.ancho, con.alto))
+            print(datos.format(con.direccion, con.peso, con.origen,  ))
         print(" ")
