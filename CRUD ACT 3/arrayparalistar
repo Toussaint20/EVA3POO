@@ -5,3 +5,6 @@ def nuevolistarEncomiendas(self):
             datos = "Direccion: {0}, Peso: {1}kg, Origen: {2}, Medidas: {3}x{4}x{5}"
             print(datos.format(con.direccion, con.peso, con.c_origen, con.longitud, con.ancho, con.alto))
         print(" ")
+# objeto Courier
+miCourier = Courier()
+miCourier.nuevolistarEncomiendas() #para listar 
